@@ -3,6 +3,7 @@
 package com.portfolio.chatloid
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +14,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,6 +31,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.Contacts
+import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.outlined.Chat
@@ -37,6 +40,7 @@ import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -228,7 +232,9 @@ private fun PageTab(listTab: List<TabItems>, modifier: Modifier = Modifier) {
         }
         HorizontalPager(
             state = pagerState,
-            modifier = modifier.fillMaxSize().weight(1f)
+            modifier = modifier
+                .fillMaxSize()
+                .weight(1f)
         ) { index ->
             Box(
                 modifier = Modifier
@@ -260,6 +266,7 @@ private fun PageTab(listTab: List<TabItems>, modifier: Modifier = Modifier) {
                         ) {
                             CategorizedLazyColumn(categories = contactList)
                         }
+                        AddContactFloatingButton()
                     }
                 }
             }
@@ -329,3 +336,36 @@ private fun CategorizedLazyColumn(
         }
     }
 }
+
+@Composable
+private fun AddContactFloatingButton(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+        .fillMaxSize()
+        .padding(20.dp, 25.dp),
+        contentAlignment = Alignment.BottomEnd
+    ) {
+        ElevatedButton(
+            onClick = {
+                print("test")
+            },
+            modifier = Modifier.size(55.dp),
+            contentPadding = PaddingValues(0.dp),
+            shape = CircleShape,
+            colors = ButtonDefaults.elevatedButtonColors(
+                containerColor = colorResource(R.color.primary),
+                contentColor = colorResource(R.color.black)
+            )
+        ) {
+            Icon(
+                imageVector = Icons.Filled.PersonAdd,
+                contentDescription = "Tombol tambah kontak",
+                modifier = modifier
+                    .size(38.dp),
+                tint = colorResource(R.color.black)
+            )
+        }
+    }
+}
+
+
