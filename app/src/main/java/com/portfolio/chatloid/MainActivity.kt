@@ -258,7 +258,7 @@ private fun PageTab(listTab: List<TabItems>, modifier: Modifier = Modifier) {
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
                         ) {
-                            Text(text = "Halaman Kontak")
+                            CategorizedLazyColumn(categories = contactList)
                         }
                     }
                 }
@@ -267,3 +267,65 @@ private fun PageTab(listTab: List<TabItems>, modifier: Modifier = Modifier) {
     }
 }
 
+
+data class Category (
+    val name : String,
+    val items : List<String>
+)
+
+val contactList = names.map {
+    Category(
+        name = it.key.toString(),
+        items = it.value
+    )
+}
+
+@Composable
+private fun CategoryHeader(
+    text : String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 16.sp,
+        fontWeight = FontWeight.Bold,
+        color = colorResource(R.color.black),
+        modifier = modifier
+            .fillMaxWidth()
+            .background(colorResource(R.color.primary))
+            .padding(16.dp, 8.dp)
+    )
+}
+
+@Composable
+private fun CategoryItem(
+    text : String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 14.sp,
+        color = colorResource(R.color.black),
+        modifier = modifier
+            .fillMaxWidth()
+            .background(colorResource(R.color.white))
+            .padding(16.dp)
+    )
+}
+
+@Composable
+private fun CategorizedLazyColumn(
+    categories : List<Category>,
+    modifier : Modifier = Modifier
+) {
+    LazyColumn(modifier = modifier) {
+        categories.forEach { category ->
+            stickyHeader {
+                CategoryHeader(category.name)
+            }
+            items(category.items) { text ->
+                CategoryItem(text)
+            }
+        }
+    }
+}
