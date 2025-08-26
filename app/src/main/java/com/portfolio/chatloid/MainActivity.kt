@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,6 +33,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Chat
@@ -54,6 +56,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -75,6 +78,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -83,6 +87,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.portfolio.chatloid.ui.theme.ChatLoidTheme
+import org.w3c.dom.Text
 import kotlin.toString
 
 class MainActivity : ComponentActivity() {
@@ -91,7 +96,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             ChatLoidTheme {
                 Column(modifier = Modifier
-                    .fillMaxWidth().background(Color.Red)
+                    .fillMaxWidth()
+                    .background(Color.Red)
 
                 ) {
                     BottomNavBar()
@@ -106,9 +112,9 @@ private fun HeaderApp(title: String, modifier: Modifier = Modifier) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-        .height(70.dp)
-        .fillMaxWidth()
-        .background(colorResource(R.color.gray))
+            .height(70.dp)
+            .fillMaxWidth()
+            .background(colorResource(R.color.gray))
     ) {
         Row(
             modifier = modifier
@@ -126,11 +132,16 @@ private fun HeaderApp(title: String, modifier: Modifier = Modifier) {
             )
             NotificationButton()
         }
+        Divider(
+            color = colorResource(R.color.primary),
+            thickness = 2.dp,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
 
 @Composable
-private fun NotificationButton(modifier: Modifier = Modifier) {
+private fun NotificationButton() {
     Button(
         onClick = {
             print("Test")
@@ -193,6 +204,7 @@ private fun BottomNavBar(modifier: Modifier = Modifier) {
     }
 
     Scaffold(
+        topBar = { HeaderApp(title = "ChatLoid") },
         bottomBar = {
             NavigationBar(containerColor = colorResource(R.color.gray)) {
                 items.forEachIndexed { index, item ->
@@ -241,7 +253,6 @@ private fun BottomNavBar(modifier: Modifier = Modifier) {
         }
     ) { innerPadding: PaddingValues ->
         Column {
-            HeaderApp(title = "ChatLoid")
             HorizontalPager(
                 state = pagerState,
                 modifier = modifier
@@ -257,7 +268,7 @@ private fun BottomNavBar(modifier: Modifier = Modifier) {
                     ) {
                     when (index) {
                         0 -> {
-                            // Page 1
+                            // chat_list_page
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
@@ -268,7 +279,7 @@ private fun BottomNavBar(modifier: Modifier = Modifier) {
                             }
                         }
                         1 -> {
-                            // Page 2
+                            // contact_page
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
@@ -289,6 +300,7 @@ private fun BottomNavBar(modifier: Modifier = Modifier) {
                                         fontWeight = FontWeight.Bold,
                                         color = colorResource(R.color.black)
                                     )
+
                                 }
 
 
@@ -297,7 +309,7 @@ private fun BottomNavBar(modifier: Modifier = Modifier) {
                             AddContactFloatingButton()
                         }
                         2 -> {
-                            // Page 2
+                            // profile_page
                             Column(
                                 modifier = Modifier
                                     .fillMaxSize()
@@ -305,7 +317,7 @@ private fun BottomNavBar(modifier: Modifier = Modifier) {
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center
                                 ) {
-                                Text(text = "Halaman Profile")
+                                ProfilePage()
                             }
                         }
                     }
@@ -409,5 +421,144 @@ private fun AddContactFloatingButton(modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+private fun ProfilePage(modifier: Modifier = Modifier){
+    Column (
+        modifier = modifier
+            .fillMaxSize()) {
+        Box(
+
+            modifier = modifier
+                .fillMaxWidth()
+                .background(
+                    color = colorResource(R.color.gray),
+                    shape = RoundedCornerShape(0.dp, 0.dp, 24.dp, 24.dp)
+                )
+                .weight(1f)
+
+        ){
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = modifier
+                    .padding(16.dp, 10.dp)
+            ){
+                ProfileActionButton()
+                ProfilePhoto()
+                ProfileData()
+            }
+        }
+        Box(
+            modifier = modifier
+                .fillMaxWidth()
+                .background(colorResource(R.color.white))
+                .weight(1f)
+        ){
+            Column(
+                modifier = modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = modifier
+                    .fillMaxSize()
+                    .weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center){
+                    Image(
+                        painter = painterResource(R.drawable.app_logo),
+                        contentDescription = "Logo Aplikasi",
+                        modifier = modifier
+                            .width(165.dp)
+                            .height(28.dp)
+                    )
+                }
+                Image(
+                    painter = painterResource(R.drawable.desktop_character),
+                    contentDescription = "Ilustrasi Dekorasi",
+                    modifier = modifier
+                        .width(283.dp)
+                        .height(168.dp)
+                        .weight(1f)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ProfileActionButton(modifier: Modifier = Modifier){
+    var onEditMode by remember {
+        mutableStateOf(false)
+    }
+    var button_text = ""
+    Box(
+        modifier = modifier.fillMaxWidth(),
+        contentAlignment = Alignment.TopEnd) {
+        Button(
+            modifier = modifier.width(97.dp),
+            onClick = {
+                onEditMode = !onEditMode
+            },
+            border = BorderStroke(1.dp, colorResource(R.color.primary)),
+            colors = ButtonDefaults.buttonColors(Color.Transparent)
+        ) {
+            if (onEditMode) button_text = "Simpan"
+                else button_text = "Edit"
+            Text(
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                fontFamily = FontFamily.SansSerif,
+                text = button_text,
+                color = colorResource(R.color.white)
+            )
+        }
+    }
+}
+
+@Composable
+private fun ProfilePhoto(modifier: Modifier = Modifier){
+    Box(
+        modifier = modifier
+            .size(140.dp)
+            .clip(CircleShape)
+            .border(1.dp, colorResource(R.color.primary),CircleShape)
+    ) {
+        Image(
+            painter = painterResource(R.drawable.pp),
+            contentDescription = "foto profile",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+}
+
+@Composable
+private fun ProfileData(modifier: Modifier = Modifier){
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Spacer(modifier.height(14.dp))
+        Text(
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.SansSerif,
+            text = "Iqmal Akbar Kurnia",
+            color = colorResource(R.color.white)
+        )
+        Spacer(modifier.height(6.dp))
+        Text(
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Normal,
+            fontFamily = FontFamily.SansSerif,
+            text = "iakbarkurnia@gmail.com",
+            color = colorResource(R.color.light_gray)
+        )
+        Spacer(modifier.height(9.dp))
+        Text(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            fontFamily = FontFamily.SansSerif,
+            text = "@Akur01",
+            color = colorResource(R.color.primary)
+        )
+    }
+}
 
 
