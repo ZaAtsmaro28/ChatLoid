@@ -1,0 +1,77 @@
+package com.portfolio.chatloid.View
+
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.portfolio.chatloid.Data.Category
+import com.portfolio.chatloid.R
+import com.portfolio.chatloid.names
+
+
+val contactList = names.map {
+    Category(
+        name = it.key.toString(),
+        items = it.value
+    )
+}
+
+@Composable
+private fun CategoryHeader(
+    text : String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 18.sp,
+        fontWeight = FontWeight.Bold,
+        color = colorResource(R.color.black),
+        modifier = modifier
+            .fillMaxWidth()
+            .background(colorResource(R.color.secondary))
+            .padding(16.dp, 5.dp)
+    )
+}
+
+@Composable
+private fun CategoryItem(
+    text : String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 14.sp,
+        color = colorResource(R.color.black),
+        modifier = modifier
+            .fillMaxWidth()
+            .background(colorResource(R.color.white))
+            .padding(16.dp)
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun CategorizedLazyColumn(
+    categories : List<Category>,
+    modifier : Modifier = Modifier
+) {
+    LazyColumn(modifier = modifier) {
+        categories.forEach { category ->
+            stickyHeader {
+                CategoryHeader(category.name)
+            }
+            items(category.items) { text ->
+                CategoryItem(text)
+            }
+        }
+    }
+}
