@@ -3,7 +3,6 @@ package com.portfolio.chatloid
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +19,6 @@ class MainActivity : ComponentActivity() {
                 Column(modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.Red)
-
                 ) {
                     BottomNavBar()
                 }

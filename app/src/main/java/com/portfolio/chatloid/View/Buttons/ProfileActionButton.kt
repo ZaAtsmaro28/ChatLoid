@@ -28,9 +28,7 @@ fun ProfileActionButton(modifier: Modifier = Modifier){
         mutableStateOf(false)
     }
     var button_text = ""
-    Box(
-        modifier = modifier.fillMaxWidth(),
-        contentAlignment = Alignment.TopEnd) {
+    Box {
         Button(
             modifier = modifier.width(97.dp),
             onClick = {
