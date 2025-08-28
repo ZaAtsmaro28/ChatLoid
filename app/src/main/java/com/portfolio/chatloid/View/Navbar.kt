@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -40,27 +38,28 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.portfolio.chatloid.Data.BottomNavigationItems
+import com.portfolio.chatloid.Data.BottomNavigationItemData
 import com.portfolio.chatloid.R
 import com.portfolio.chatloid.View.Buttons.AddContactFloatingButton
+import com.portfolio.chatloid.dummyData.chatList
 
 @Composable
 fun BottomNavBar(modifier: Modifier = Modifier) {
     val items = listOf(
-        BottomNavigationItems(
+        BottomNavigationItemData(
             title = "Percakapan",
             unselectedIcon = Icons.Outlined.Chat,
             selectedIcon = Icons.Filled.Chat,
             hasNews = false,
             badgeCount = 12
         ),
-        BottomNavigationItems(
+        BottomNavigationItemData(
             title = "Kontak",
             unselectedIcon = Icons.Outlined.Contacts,
             selectedIcon = Icons.Filled.Contacts,
             hasNews = false
         ),
-        BottomNavigationItems(
+        BottomNavigationItemData(
             title = "Profile",
             unselectedIcon = Icons.Outlined.AccountCircle,
             selectedIcon = Icons.Filled.AccountCircle,
@@ -152,10 +151,10 @@ fun BottomNavBar(modifier: Modifier = Modifier) {
                             Box(
                                 modifier = Modifier
                                     .fillMaxSize()
-                                    .background(colorResource(R.color.white)),
-                                contentAlignment = Alignment.Center
+                                    .background(colorResource(R.color.white))
+                                    .padding(10.dp, 10.dp, 10.dp, 0.dp),
                             ) {
-                                Text(text = "Halaman Percakapan")
+                                ChatList(chatList)
                             }
                         }
                         1 -> {
