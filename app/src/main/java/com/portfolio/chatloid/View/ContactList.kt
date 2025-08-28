@@ -16,18 +16,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.portfolio.chatloid.Data.Category
+import com.portfolio.chatloid.Data.CategoryData
 import com.portfolio.chatloid.R
-import com.portfolio.chatloid.names
+import com.portfolio.chatloid.dummyData.names
 
 
 val contactList = names.map {
-    Category(
+    CategoryData(
         name = it.key.toString(),
         items = it.value
     )
@@ -84,7 +83,7 @@ private fun CategoryItem(
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun CategorizedLazyColumn(
-    categories : List<Category>,
+    categories : List<CategoryData>,
     modifier : Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
