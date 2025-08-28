@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
@@ -165,20 +166,28 @@ fun BottomNavBar(modifier: Modifier = Modifier) {
                                     .background(colorResource(R.color.white)),
                                 verticalArrangement = Arrangement.Center
                             ) {
-                                Column(modifier = modifier.padding(16.dp, 4.dp)) {
+                                Column(
+                                    modifier = modifier
+                                        .fillMaxWidth()
+                                ) {
                                     Text(
+                                        modifier = modifier
+                                            .padding(16.dp, 1.dp),
                                         text = "Pilih Kontak",
                                         fontSize = 20.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = colorResource(R.color.black)
                                     )
-                                    Spacer(modifier.height(3.dp))
                                     Text(
+                                        modifier = modifier
+                                            .padding(16.dp, 1.dp),
                                         text = "123 Kontak",
                                         fontSize = 14.sp,
                                         fontWeight = FontWeight.Bold,
                                         color = colorResource(R.color.black)
                                     )
+
+                                    SearchBox()
 
                                 }
 
