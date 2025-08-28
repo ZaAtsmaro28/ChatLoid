@@ -2,7 +2,7 @@ package com.portfolio.chatloid.Data
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
-data class BottomNavigationItems(
+data class BottomNavigationItemData(
     val title: String,
     val unselectedIcon: ImageVector,
     val selectedIcon: ImageVector,

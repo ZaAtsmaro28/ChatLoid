@@ -1,4 +1,4 @@
-package com.portfolio.chatloid
+package com.portfolio.chatloid.dummyData
 
 val names = listOf(
     "Andi Pratama",
