@@ -42,6 +42,7 @@ import com.portfolio.chatloid.Data.BottomNavigationItemData
 import com.portfolio.chatloid.R
 import com.portfolio.chatloid.View.Buttons.AddContactFloatingButton
 import com.portfolio.chatloid.dummyData.chatList
+import com.portfolio.chatloid.navigation.LocalNavController
 
 @Composable
 fun BottomNavBar(modifier: Modifier = Modifier) {

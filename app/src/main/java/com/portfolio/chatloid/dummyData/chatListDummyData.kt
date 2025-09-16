@@ -5,20 +5,20 @@ import com.portfolio.chatloid.R
 
 val chatList = listOf(
     ChatListItemData(
-        avatar = R.drawable.pp,
-        name = "Aldova Ferdiansyah Nugraha",
+        avatar = R.drawable.person1,
+        name = "Aldova Ferdiansyah",
         previewChat = "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         time = "19.00"
     ),
     ChatListItemData(
-        avatar = R.drawable.pp,
-        name = "Faza Atsmaro Hifdzullah Supangat",
+        avatar = R.drawable.person2,
+        name = "Faza Atsmaro",
         previewChat = "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         time = "19.00"
     ),
     ChatListItemData(
-        avatar = R.drawable.pp,
-        name = "Iqmal Akbar Kurnia",
+        avatar = R.drawable.person3,
+        name = "Iqmal Akbar",
         previewChat = "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         time = "19.00"
     ),
