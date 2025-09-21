@@ -9,26 +9,40 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Logout
 import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,40 +55,55 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import com.portfolio.chatloid.R
+import com.portfolio.chatloid.navigation.LocalNavController
 import com.portfolio.chatloid.view.Buttons.BasicIconButton
 
 @Preview
 @Composable
 fun ChatRoom() {
     Scaffold(
-        topBar = { ChatRoomHeader() }
+        containerColor = Color.Transparent,
+        topBar = { ChatRoomHeader() },
+        bottomBar = {
+            WriteMessageField()
+        },
+        modifier = Modifier.background(Color.Transparent)
     ) { innerPadding: PaddingValues ->
-        Column(
+        Box(
             modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize()
-                .background(colorResource(R.color.white))
-                .padding(16.dp, 30.dp, 16.dp, 0.dp)
-        ) {
-            MyBubbleChat("Lorem ipsum dolor sit amet", "19.00")
+            .fillMaxSize()
+            .background(Color.Transparent)){
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxWidth()
+                    .background(colorResource(R.color.white))
+                    .padding(16.dp, 0.dp, 16.dp, 0.dp)
+                    .verticalScroll(rememberScrollState()),
+                verticalArrangement = Arrangement.Bottom
+            ) {
+                Spacer(modifier = Modifier.height(12.dp))
+                MyBubbleChat("Lorem ipsum dolor sit amet. Sed tristique, sapien", "19.00")
 
-            FriendBubbleChat("Sed tristique, sapien sit amet convallis malesuada, elit massa cursus neque", "19.00")
+                FriendBubbleChat("Sed tristique, sapien sit amet convallis malesuada, elit massa cursus neque", "19.00")
 
-            MyBubbleChat("lorem", "19.00")
+                MyBubbleChat("lorem", "19.00")
 
-            FriendBubbleChat("ok", "19.00")
+                FriendBubbleChat("ok", "19.00")
 
-            MyBubbleChat(
-                "Nullam vel sapien vitae justo efficitur facilisis. Phasellus commodo magna in magna scelerisque, vitae tincidunt risus porta. Ut luctus, justo ac porta aliquet, erat erat volutpat ipsum, vel accumsan mauris odio sed nulla.",
-                "19.00"
-            )
+                MyBubbleChat(
+                    "Nullam vel sapien vitae justo efficitur facilisis. Phasellus commodo magna in magna scelerisque, vitae tincidunt risus porta. Ut luctus, justo ac porta aliquet, erat erat volutpat ipsum, vel accumsan mauris odio sed nulla.",
+                    "19.00"
+                )
 
-            FriendBubbleChat(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, sapien sit amet convallis malesuada, elit massa cursus neque, nec tincidunt nisi lorem at ante. Integer egestas arcu nec lectus faucibus, id gravida nisi vulputate. Nullam vel sapien vitae justo efficitur facilisis.",
-                "20.00"
-            )
+                FriendBubbleChat(
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, sapien sit amet convallis malesuada, elit massa cursus neque, nec tincidunt nisi lorem at ante. Integer egestas arcu nec lectus faucibus, id gravida nisi vulputate. Nullam vel sapien vitae justo efficitur facilisis.",
+                    "20.00"
+                )
+            }
         }
     }
 }
@@ -82,6 +111,7 @@ fun ChatRoom() {
 
 @Composable
 fun ChatRoomHeader() {
+    val navController = LocalNavController.current
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -97,7 +127,9 @@ fun ChatRoomHeader() {
         ) {
             Button(
                 modifier = Modifier.width(34.dp),
-                onClick = {  },
+                onClick = {
+                    navController.navigate("main_screen")
+                },
                 colors = ButtonDefaults.buttonColors(Color.Transparent),
                 contentPadding = PaddingValues(0.dp)
             ) {
@@ -149,13 +181,14 @@ fun ChatRoomHeader() {
     }
 }
 
+
 @Composable
 fun MyBubbleChat(text: String, time: String) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.End)
-    {
-        Row(
+        horizontalAlignment = Alignment.End
+    ) {
+        Box(
             modifier = Modifier
                 .background(
                     colorResource(R.color.primary),
@@ -166,34 +199,35 @@ fun MyBubbleChat(text: String, time: String) {
                         bottomEnd = 2.dp
                     )
                 )
-                .padding(14.dp)
-                .widthIn(max = 290.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ){
+                .padding(10.dp)
+                .widthIn(max = 288.dp),
+            contentAlignment = Alignment.Center
+        ) {
             Text(
-                textAlign = TextAlign.Justify,
                 text = text,
+                textAlign = TextAlign.Justify,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Normal,
                 color = colorResource(R.color.black),
-                modifier = Modifier.widthIn(max = 244.dp)
+                modifier = Modifier
+                    .padding(end = 45.dp)
             )
-            Spacer(modifier = Modifier.width(12.dp))
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.End,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
             ) {
                 Text(
                     text = "Dibaca",
                     fontSize = 11.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = colorResource(R.color.black)
+                    color = colorResource(R.color.black),
+                    lineHeight = 15.sp
                 )
-                Spacer(modifier = Modifier.height(1.dp))
                 Text(
                     text = time,
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = colorResource(R.color.black)
+                    color = colorResource(R.color.black),
+                    lineHeight = 15.sp
                 )
             }
         }
@@ -201,13 +235,14 @@ fun MyBubbleChat(text: String, time: String) {
     }
 }
 
+
 @Composable
 fun FriendBubbleChat(text: String, time: String) {
     Column(
         modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.Start)
-    {
-        Row(
+        horizontalAlignment = Alignment.Start
+    ) {
+        Box(
             modifier = Modifier
                 .background(
                     colorResource(R.color.gray),
@@ -218,38 +253,86 @@ fun FriendBubbleChat(text: String, time: String) {
                         bottomEnd = 12.dp
                     )
                 )
-                .padding(14.dp)
-                .widthIn(max = 290.dp),
-            verticalAlignment = Alignment.CenterVertically
-
-        ){
+                .padding(10.dp)
+                .widthIn(max = 288.dp),
+            contentAlignment = Alignment.Center
+        ) {
             Text(
-                textAlign = TextAlign.Justify,
                 text = text,
+                textAlign = TextAlign.Justify,
                 fontSize = 15.sp,
                 fontWeight = FontWeight.Normal,
                 color = colorResource(R.color.white),
-                modifier = Modifier.widthIn(max = 244.dp)
+                modifier = Modifier
+                    .padding(end = 45.dp)
             )
-            Spacer(modifier = Modifier.width(12.dp))
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.End,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
             ) {
-                Text(
-                    text = "",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = colorResource(R.color.white)
-                )
-                Spacer(modifier = Modifier.height(1.dp))
                 Text(
                     text = time,
                     fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = colorResource(R.color.white)
+                    color = colorResource(R.color.white),
+                    lineHeight = 15.sp
                 )
             }
         }
         Spacer(modifier = Modifier.height(12.dp))
+    }
+}
+
+
+@Composable
+fun WriteMessageField() {
+    var new_message by remember { mutableStateOf("") }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp),
+        verticalAlignment = Alignment.Bottom) {
+        TextField(
+            value = new_message,
+            placeholder = {Text("Ketik pesan")},
+            onValueChange = { new_message = it },
+            shape = RoundedCornerShape(30.dp),
+            modifier = Modifier
+                .border(
+                    2.dp,
+                    colorResource(R.color.primary),
+                    RoundedCornerShape(30.dp)
+                )
+                .weight(6f)
+                .heightIn(max = 200.dp),
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = colorResource(R.color.gray),
+                focusedContainerColor = colorResource(R.color.gray),
+                unfocusedTextColor = colorResource(R.color.white),
+                focusedTextColor = colorResource(R.color.white),
+                unfocusedPlaceholderColor = colorResource(R.color.light_gray),
+                focusedPlaceholderColor = colorResource(R.color.light_gray),
+                cursorColor = colorResource(R.color.primary),
+            ),
+
+
+        )
+        Button(
+            onClick = {},
+            modifier = Modifier
+                .size(50.dp)
+                .weight(1f),
+            shape = CircleShape,
+            contentPadding = PaddingValues(0.dp),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.primary)
+            )
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.send_icon),
+                contentDescription = "Tombol Kirim",
+                modifier = Modifier.size(24.dp)
+            )
+        }
     }
 }
