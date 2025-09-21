@@ -38,6 +38,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,12 +58,23 @@ fun ChatRoom() {
                 .background(colorResource(R.color.white))
                 .padding(16.dp, 30.dp, 16.dp, 0.dp)
         ) {
-            MyBubbleChat("Isukan rada beurang sigana urang, dek ka imah babaturan heula Bapakna gering sakalian dek nalongok", "19.00")
-            FriendBubbleChat("Dek ngabahas naon mal?", "19.00")
-            MyBubbleChat("ek ngabahas mslah projek tdi", "19.00")
-            FriendBubbleChat("Urang usahakeun", "19.00")
-            MyBubbleChat("ok ath sip", "19.00")
-            FriendBubbleChat("Isukan rada beurang sigana urang, dek ka imah babaturan heula Bapakna gering sakalian dek nalongok", "20.00")
+            MyBubbleChat("Lorem ipsum dolor sit amet", "19.00")
+
+            FriendBubbleChat("Sed tristique, sapien sit amet convallis malesuada, elit massa cursus neque", "19.00")
+
+            MyBubbleChat("lorem", "19.00")
+
+            FriendBubbleChat("ok", "19.00")
+
+            MyBubbleChat(
+                "Nullam vel sapien vitae justo efficitur facilisis. Phasellus commodo magna in magna scelerisque, vitae tincidunt risus porta. Ut luctus, justo ac porta aliquet, erat erat volutpat ipsum, vel accumsan mauris odio sed nulla.",
+                "19.00"
+            )
+
+            FriendBubbleChat(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique, sapien sit amet convallis malesuada, elit massa cursus neque, nec tincidunt nisi lorem at ante. Integer egestas arcu nec lectus faucibus, id gravida nisi vulputate. Nullam vel sapien vitae justo efficitur facilisis.",
+                "20.00"
+            )
         }
     }
 }
@@ -159,8 +171,9 @@ fun MyBubbleChat(text: String, time: String) {
             verticalAlignment = Alignment.CenterVertically
         ){
             Text(
+                textAlign = TextAlign.Justify,
                 text = text,
-                fontSize = 14.sp,
+                fontSize = 15.sp,
                 fontWeight = FontWeight.Normal,
                 color = colorResource(R.color.black),
                 modifier = Modifier.widthIn(max = 244.dp)
@@ -211,8 +224,9 @@ fun FriendBubbleChat(text: String, time: String) {
 
         ){
             Text(
+                textAlign = TextAlign.Justify,
                 text = text,
-                fontSize = 14.sp,
+                fontSize = 15.sp,
                 fontWeight = FontWeight.Normal,
                 color = colorResource(R.color.white),
                 modifier = Modifier.widthIn(max = 244.dp)
