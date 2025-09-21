@@ -1,26 +1,37 @@
-package com.portfolio.chatloid.View.login
+package com.portfolio.chatloid.view.login
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.portfolio.chatloid.R
+import com.portfolio.chatloid.navigation.LocalNavController
 
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier) {
+    val navController = LocalNavController.current
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -72,24 +83,41 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             }
             Column(
                 modifier
-//                    .background(Color.Blue)
                     .fillMaxWidth()
                     .weight(5f),
                 Arrangement.SpaceAround,
                 Alignment.CenterHorizontally) {
                 Button(
-                    onClick = {  },
+                    onClick = {
+                        navController.navigate("main_screen")
+                    },
+                    shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.elevatedButtonColors(
-                        containerColor = colorResource(R.color.primary),
+                        containerColor = Color.Transparent,
                         contentColor = colorResource(R.color.black)
-                    )
+                    ),
+                    modifier = modifier
+                        .border(
+                        2.dp,
+                        colorResource(R.color.black),
+                        RoundedCornerShape(12.dp)
+                        )
                 ) {
-                    Text("Button Login")
+                    Image(
+                        painter = painterResource(R.drawable.google_icon),
+                        contentDescription = null,
+                        modifier = modifier.size(26.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text("Masuk menggunakan akun Google")
                 }
-                Image(
-                    painter = painterResource(R.drawable.login_icon_3),
-                    contentDescription = "Ilustrasi Dekorasi",
-                )
+                Text(
+                    text = "ChatLoid.com",
+                    fontSize = 20.sp,
+                    fontFamily = FontFamily.SansSerif,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = colorResource(R.color.black)
+                    )
             }
 
 

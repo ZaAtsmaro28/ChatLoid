@@ -8,8 +8,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.portfolio.chatloid.View.BottomNavBar
-import com.portfolio.chatloid.View.login.LoginScreen
+import com.portfolio.chatloid.view.BottomNavBar
+import com.portfolio.chatloid.view.addContact.AddContactScreen
+import com.portfolio.chatloid.view.chatroom.ChatRoom
+import com.portfolio.chatloid.view.login.LoginScreen
+import com.portfolio.chatloid.view.notification.NotificationScreen
 
 
 val LocalNavController = staticCompositionLocalOf<NavHostController> {
@@ -22,7 +25,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
     CompositionLocalProvider(LocalNavController provides navController) {
         NavHost(
             navController = navController,
-            startDestination = "login"
+            startDestination = "addcontact_screen"
         ) {
             composable("login") {
                 LoginScreen()
@@ -31,10 +34,13 @@ fun AppNavigation(modifier: Modifier = Modifier) {
                 BottomNavBar()
             }
             composable("notification_screen") {
-
+                NotificationScreen()
+            }
+            composable("addcontact_screen") {
+                AddContactScreen()
             }
             composable("chatroom_screen") {
-
+                ChatRoom()
             }
         }
     }

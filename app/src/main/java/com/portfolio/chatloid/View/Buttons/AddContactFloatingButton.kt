@@ -1,4 +1,4 @@
-package com.portfolio.chatloid.View.Buttons
+package com.portfolio.chatloid.view.Buttons
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -17,9 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.portfolio.chatloid.R
+import com.portfolio.chatloid.navigation.LocalNavController
 
 @Composable
 fun AddContactFloatingButton(modifier: Modifier = Modifier) {
+    val navController = LocalNavController.current
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -28,11 +30,12 @@ fun AddContactFloatingButton(modifier: Modifier = Modifier) {
     ) {
         ElevatedButton(
             onClick = {
-                print("test")
+                navController.navigate("addcontact_screen")
             },
             modifier = Modifier.size(55.dp),
             contentPadding = PaddingValues(0.dp),
             shape = CircleShape,
+            elevation = ButtonDefaults.elevatedButtonElevation(4.dp),
             colors = ButtonDefaults.elevatedButtonColors(
                 containerColor = colorResource(R.color.primary),
                 contentColor = colorResource(R.color.black)

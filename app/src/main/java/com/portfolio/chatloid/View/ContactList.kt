@@ -1,4 +1,4 @@
-package com.portfolio.chatloid.View
+package com.portfolio.chatloid.view
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -20,7 +20,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.portfolio.chatloid.Data.CategoryData
+import com.portfolio.chatloid.model.CategoryData
 import com.portfolio.chatloid.R
 import com.portfolio.chatloid.dummyData.names
 

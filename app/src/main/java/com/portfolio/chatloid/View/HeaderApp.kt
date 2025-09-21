@@ -1,4 +1,4 @@
-package com.portfolio.chatloid.View
+package com.portfolio.chatloid.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Logout
 import androidx.compose.material.icons.outlined.Notifications
-import androidx.compose.material.icons.outlined.PowerSettingsNew
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,10 +23,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.portfolio.chatloid.R
-import com.portfolio.chatloid.View.Buttons.BasicIconButton
+import com.portfolio.chatloid.view.Buttons.BasicIconButton
+import com.portfolio.chatloid.navigation.LocalNavController
 
 @Composable
 fun HeaderApp(title: String, modifier: Modifier = Modifier) {
+    val navController = LocalNavController.current
+
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
@@ -53,12 +55,18 @@ fun HeaderApp(title: String, modifier: Modifier = Modifier) {
                 BasicIconButton(
                     icon = Icons.Outlined.Notifications,
                     desc = "Tombol Notifikasi",
-                )
+                    modifier = modifier.size(30.dp)
+                ){
+                    navController.navigate("notification_screen")
+                }
                 Spacer(Modifier.size(4.dp))
                 BasicIconButton(
                     icon = Icons.Outlined.Logout,
-                    desc = "Tombol Logout"
-                )
+                    desc = "Tombol Logout",
+                    modifier = modifier.size(30.dp)
+                ){
+                    navController.navigate("login")
+                }
             }
         }
         Divider(

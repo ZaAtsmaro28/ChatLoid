@@ -1,6 +1,6 @@
 package com.portfolio.chatloid.dummyData
 
-import com.portfolio.chatloid.Data.ChatListItemData
+import com.portfolio.chatloid.model.ChatListItemData
 import com.portfolio.chatloid.R
 
 val chatList = listOf(

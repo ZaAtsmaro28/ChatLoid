@@ -1,4 +1,4 @@
-package com.portfolio.chatloid.Data
+package com.portfolio.chatloid.model
 
 data class CategoryData (
     val name : String,

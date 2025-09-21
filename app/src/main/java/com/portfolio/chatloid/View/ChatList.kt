@@ -1,4 +1,4 @@
-package com.portfolio.chatloid.View
+package com.portfolio.chatloid.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.portfolio.chatloid.Data.ChatListItemData
+import com.portfolio.chatloid.model.ChatListItemData
 import com.portfolio.chatloid.R
 
 @Composable

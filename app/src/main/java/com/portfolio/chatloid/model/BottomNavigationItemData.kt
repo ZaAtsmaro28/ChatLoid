@@ -1,4 +1,4 @@
-package com.portfolio.chatloid.Data
+package com.portfolio.chatloid.model
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

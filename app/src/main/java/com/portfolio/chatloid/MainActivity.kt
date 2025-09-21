@@ -3,13 +3,9 @@ package com.portfolio.chatloid
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import com.portfolio.chatloid.View.BottomNavBar
 import com.portfolio.chatloid.navigation.AppNavigation
 import com.portfolio.chatloid.ui.theme.ChatLoidTheme
 

@@ -1,4 +1,4 @@
-package com.portfolio.chatloid.View
+package com.portfolio.chatloid.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -38,11 +38,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.portfolio.chatloid.Data.BottomNavigationItemData
+import com.portfolio.chatloid.model.BottomNavigationItemData
 import com.portfolio.chatloid.R
-import com.portfolio.chatloid.View.Buttons.AddContactFloatingButton
+import com.portfolio.chatloid.view.Buttons.AddContactFloatingButton
 import com.portfolio.chatloid.dummyData.chatList
-import com.portfolio.chatloid.navigation.LocalNavController
 
 @Composable
 fun BottomNavBar(modifier: Modifier = Modifier) {
