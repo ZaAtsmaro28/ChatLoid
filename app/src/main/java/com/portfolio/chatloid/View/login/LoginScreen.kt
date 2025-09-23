@@ -1,5 +1,6 @@
 package com.portfolio.chatloid.view.login
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -23,8 +24,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.portfolio.chatloid.BuildConfig
 import com.portfolio.chatloid.R
 import com.portfolio.chatloid.navigation.LocalNavController
 
@@ -126,3 +129,4 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         }
     }
 }
+

@@ -1,8 +1,19 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
+
+val configProperties = File(rootDir, "config.properties")
+val config = Properties()
+
+if (configProperties.exists()){
+    config.load(configProperties.inputStream())
+}
+val googleClientId = config.getProperty("GOOGLE_CLIENT_ID")?:""
+val apiUrl = config.getProperty("API_URL")?:""
 
 android {
     namespace = "com.portfolio.chatloid"
@@ -16,6 +27,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "GOOGLE_CLIENT_ID", "\"$googleClientId\"")
+        buildConfigField("String", "API_URL", "\"$apiUrl\"")
     }
 
     buildTypes {
@@ -36,6 +49,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

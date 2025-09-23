@@ -25,7 +25,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
     CompositionLocalProvider(LocalNavController provides navController) {
         NavHost(
             navController = navController,
-            startDestination = "chatroom_screen"
+            startDestination = "login"
         ) {
             composable("login") {
                 LoginScreen()
